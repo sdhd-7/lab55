@@ -5,6 +5,12 @@ public class Location {
     private Long y; //Поле не может быть null
     private String name; //Строка не может быть пустой, Поле не может быть null
 
+    public Location(Long x, Long y, String name) {
+        this.x = x;
+        this.y = y;
+        this.name = name;
+    }
+
     public Long getX() {
         return x;
     }

@@ -7,6 +7,7 @@ public class Dragon {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     //ok
     private String name; //Поле не может быть null, Строка не может быть пустой
+    //ok
     private Coordinates coordinates; //Поле не может быть null
     //ok
     private java.time.LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
@@ -16,7 +17,7 @@ public class Dragon {
     private boolean speaking;
     //ok
     private DragonType type; //Поле не может быть null
-    //
+    //ok
     private DragonCharacter character; //Поле не может быть null
     private Person killer; //Поле может быть null
 

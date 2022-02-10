@@ -1,6 +1,4 @@
-import defaults.Coordinates;
-import defaults.Dragon;
-import defaults.DragonType;
+import defaults.*;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -17,7 +15,7 @@ public class Main {
             String[] curr = s.split(" ");
             switch (curr[0]) {
                 case ("add"):
-                    Integer id = Integer.parseInt(curr[1]);
+
 
                     //создание нового объекта
                     Dragon temp = new Dragon();
@@ -34,30 +32,28 @@ public class Main {
 
                     //дата создания
                     temp.setCreationDate(LocalDateTime.now());
-                    System.out.println(LocalDateTime.now());
 
                     //age
                     System.out.println("Введите возраст дракона: ");
                     tmp = scanner.nextLine();
-                    System.out.println(tmp);
                     int age;
                     if (!tmp.equals("")) {
                         age = Integer.parseInt(tmp);
                         while (age <= 0) {
-                            System.out.println("Здоровье не может быть меньше нуля: ");
+                            System.out.println("Возраст не может быть меньше нуля: ");
                             age = Integer.parseInt(scanner.nextLine());
                         }
                         temp.setAge(age);
                     }
 
-                    //heart count
-                    System.out.println("Умеет ли дракон разговаривать Д/Н?: ");
+                    //speak
+                    System.out.println("Умеет ли дракон разговаривать Y/N?: ");
                     tmp = scanner.nextLine();
-                    while (!(tmp.equals("Д") || tmp.equals("Н"))) {
-                        System.out.println("Умеет ли дракон разговаривать, введите Д/Н?: ");
+                    while (!(tmp.equals("Y") || tmp.equals("N"))) {
+                        System.out.println("Умеет ли дракон разговаривать, введите Y/n?: ");
                         tmp = scanner.nextLine();
                     }
-                    temp.setSpeaking(tmp.equals("Д"));
+                    temp.setSpeaking(tmp.equals("Y"));
 
                     //coord x y
                     System.out.println("Введите координату X: ");
@@ -107,30 +103,185 @@ public class Main {
                     //dragon character
                     fl = true;
                     while (fl) {
-                        System.out.println("Выберите один из данных типов вооружения\nWATER\n" +
-                                "UNDERGROUND\n" +
-                                "AIR\n" +
-                                "FIRE");
+                        System.out.println("Выберите один из данных характеров дракона\nWISE\n" +
+                                "EVIL\n" +
+                                "CHAOTIC_EVIL\n" +
+                                "FICKLE");
                         tmp = scanner.nextLine();
                         fl = false;
                         switch (tmp) {
-                            case "UNDERGROUND":
-                                temp.setType(DragonType.UNDERGROUND);
+                            case "EVIL":
+                                temp.setCharacter(DragonCharacter.EVIL);
                                 break;
-                            case "WATER":
-                                temp.setType(DragonType.WATER);
+                            case "WISE":
+                                temp.setCharacter(DragonCharacter.WISE);
                                 break;
-                            case "AIR":
-                                temp.setType(DragonType.AIR);
+                            case "CHAOTIC_EVIL":
+                                temp.setCharacter(DragonCharacter.CHAOTIC_EVIL);
                                 break;
-                            case "FIRE":
-                                temp.setType(DragonType.FIRE);
+                            case "FICKLE":
+                                temp.setCharacter(DragonCharacter.FICKLE);
                                 break;
                             default:
                                 fl = true;
                                 break;
                         }
                     }
+
+                    //Killer
+
+                    System.out.println("Жив ли дракон? Y/N");
+
+                    tmp = scanner.nextLine();
+                    while (!(tmp.equals("Y") || tmp.equals("N"))) {
+                        System.out.println("Жив ли дракон, введите Y/n?: ");
+                        tmp = scanner.nextLine();
+                    }
+                    if (tmp.equals("Y")) {
+                        temp.setKiller(null);
+                    } else {
+                        Person lol = new Person();
+
+                        //name killer
+                        System.out.println("Введите имя драконоборца: ");
+                        tmp = scanner.nextLine();
+                        while (tmp.equals("")) {
+                            System.out.println("Имя не может быть пустым, введите имя: ");
+                            tmp = scanner.nextLine();
+                        }
+                        lol.setName(tmp);
+
+                        //killer passport
+                        System.out.println("Введите паспорт драконоборца: ");
+                        tmp = scanner.nextLine();
+                        while (!(tmp.length() < 35 && tmp.length() >= 4 || tmp.length() == 0)) {
+                            System.out.println("количество символов в паспорте должно быть не меньше 4 и не больше 34, введите паспорт: ");
+                            tmp = scanner.nextLine();
+                        }
+                        lol.setName(tmp.length() == 0 ? tmp : null);
+
+                        //hair color
+                        fl = true;
+                        while (fl) {
+                            System.out.println("Выберите один из данных цветов волос драконоборца\n" +
+                                    "BLACK\n" +
+                                    "BLUE\n" +
+                                    "WHITE\n" +
+                                    "YELLOW\n" +
+                                    "BROWN");
+                            tmp = scanner.nextLine();
+                            fl = false;
+                            switch (tmp) {
+                                case "BLACK":
+                                    lol.setHairColor(Color.BLACK);
+                                    break;
+                                case "BLUE":
+                                    lol.setHairColor(Color.BLUE);
+                                    break;
+                                case "WHITE":
+                                    lol.setHairColor(Color.WHITE);
+                                    break;
+                                case "YELLOW":
+                                    lol.setHairColor(Color.YELLOW);
+                                    break;
+                                case "BROWN":
+                                    lol.setHairColor(Color.BROWN);
+                                    break;
+                                case "":
+                                    lol.setHairColor(null);
+                                    break;
+                                default:
+                                    fl = true;
+                                    break;
+                            }
+                        }
+
+                        //eyes color
+                        fl = true;
+                        while (fl) {
+                            System.out.println("Выберите один из данных цветов зрачка драконоборца\n" +
+                                    "BLACK\n" +
+                                    "BLUE\n" +
+                                    "WHITE\n" +
+                                    "YELLOW\n" +
+                                    "BROWN");
+                            tmp = scanner.nextLine();
+                            fl = false;
+                            switch (tmp) {
+                                case "BLACK":
+                                    lol.setHairColor(Color.BLACK);
+                                    break;
+                                case "BLUE":
+                                    lol.setHairColor(Color.BLUE);
+                                    break;
+                                case "WHITE":
+                                    lol.setHairColor(Color.WHITE);
+                                    break;
+                                case "YELLOW":
+                                    lol.setHairColor(Color.YELLOW);
+                                    break;
+                                case "BROWN":
+                                    lol.setHairColor(Color.BROWN);
+                                    break;
+                                case "":
+                                    lol.setHairColor(null);
+                                    break;
+                                default:
+                                    fl = true;
+                                    break;
+                            }
+                        }
+
+                        //nationality
+                        fl = true;
+                        while (fl) {
+                            System.out.println("Выберите одну из данных национальностей драконоборца\n" +
+                                    "GERMANY\n" +
+                                    "ITALY\n" +
+                                    "SOUTH_KOREA");
+                            tmp = scanner.nextLine();
+                            fl = false;
+                            switch (tmp) {
+                                case "GERMANY":
+                                    lol.setNationality(Country.GERMANY);
+                                    break;
+                                case "ITALY":
+                                    lol.setNationality(Country.ITALY);
+                                    break;
+                                case "SOUTH_KOREA":
+                                    lol.setNationality(Country.SOUTH_KOREA);
+                                    break;
+                                case "":
+                                    lol.setHairColor(null);
+                                    break;
+                                default:
+                                    fl = true;
+                                    break;
+                            }
+                        }
+
+                        //location
+                        System.out.println("Знаете ли вы месторасположение драконоборца? Y/N");
+
+                        tmp = scanner.nextLine();
+                        while (!(tmp.equals("Y") || tmp.equals("N"))) {
+                            System.out.println("Знаете ли вы месторасположение драконоборца, введите Y/N?: ");
+                            tmp = scanner.nextLine();
+                        }
+                        if (tmp.equals("N")) {
+                            lol.setLocation(null);
+                        } else {
+                            System.out.println("Введите координату X: ");
+                            x = Long.parseLong(scanner.nextLine());
+                            System.out.println("Введите координату Y: ");
+                            y = Long.parseLong(scanner.nextLine());
+                            System.out.println("Укажите название местности: ");
+                            lol.setLocation(new Location(x, y, scanner.nextLine()));
+                        }
+                        temp.setKiller(lol);
+                    }
+
+                    current.addLast(temp);
 
 
             }
