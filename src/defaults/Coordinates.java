@@ -1,19 +1,6 @@
 package defaults;
 
 public class Coordinates {
-    private Integer x; //Поле не может быть null
-    private double y;
-
-    public Coordinates(Integer x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public void setX(Integer x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
+    private long x; //Значение поля должно быть больше -198
+    private long y;
 }
