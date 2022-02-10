@@ -1,4 +1,4 @@
-package defoult;
+package defaults;
 
 public class Chapter {
     private String name; //Поле не может быть null, Строка не может быть пустой

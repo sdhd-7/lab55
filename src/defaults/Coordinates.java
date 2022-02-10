@@ -1,4 +1,4 @@
-package defoult;
+package defaults;
 
 public class Coordinates {
     private Integer x; //Поле не может быть null
