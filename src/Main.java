@@ -158,7 +158,7 @@ public class Main {
                             System.out.println("количество символов в паспорте должно быть не меньше 4 и не больше 34, введите паспорт: ");
                             tmp = scanner.nextLine();
                         }
-                        lol.setName(tmp.length() == 0 ? tmp : null);
+                        lol.setPassportID(tmp.length() == 0 ? tmp : null);
 
                         //hair color
                         fl = true;
@@ -209,22 +209,22 @@ public class Main {
                             fl = false;
                             switch (tmp) {
                                 case "BLACK":
-                                    lol.setHairColor(Color.BLACK);
+                                    lol.setEyeColor(Color.BLACK);
                                     break;
                                 case "BLUE":
-                                    lol.setHairColor(Color.BLUE);
+                                    lol.setEyeColor(Color.BLUE);
                                     break;
                                 case "WHITE":
-                                    lol.setHairColor(Color.WHITE);
+                                    lol.setEyeColor(Color.WHITE);
                                     break;
                                 case "YELLOW":
-                                    lol.setHairColor(Color.YELLOW);
+                                    lol.setEyeColor(Color.YELLOW);
                                     break;
                                 case "BROWN":
-                                    lol.setHairColor(Color.BROWN);
+                                    lol.setEyeColor(Color.BROWN);
                                     break;
                                 case "":
-                                    lol.setHairColor(null);
+                                    lol.setEyeColor(null);
                                     break;
                                 default:
                                     fl = true;
@@ -272,16 +272,35 @@ public class Main {
                             lol.setLocation(null);
                         } else {
                             System.out.println("Введите координату X: ");
-                            x = Long.parseLong(scanner.nextLine());
+                            tmp = scanner.nextLine();
+                            while (tmp.equals("")) {
+
+                                System.out.println("Введите координату X: ");
+                                tmp = scanner.nextLine();
+                            }
+                            x = Long.parseLong(tmp);
                             System.out.println("Введите координату Y: ");
-                            y = Long.parseLong(scanner.nextLine());
+                            tmp = scanner.nextLine();
+                            while (tmp.equals("")) {
+
+                                System.out.println("Введите координату Y: ");
+                                tmp = scanner.nextLine();
+                            }
+                            y = Long.parseLong(tmp);
                             System.out.println("Укажите название местности: ");
-                            lol.setLocation(new Location(x, y, scanner.nextLine()));
+                            tmp = scanner.nextLine();
+                            while (tmp.equals("")) {
+
+                                System.out.println("Укажите название местности: ");
+                                tmp = scanner.nextLine();
+                            }
+                            lol.setLocation(new Location(x, y, tmp));
                         }
                         temp.setKiller(lol);
                     }
-
+                    System.out.println("Дракон успешно добавлен");
                     current.addLast(temp);
+                    break;
 
 
             }
