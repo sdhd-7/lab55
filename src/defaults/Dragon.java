@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 
 public class Dragon {
+    //ok
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     //ok
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -19,6 +20,7 @@ public class Dragon {
     private DragonType type; //Поле не может быть null
     //ok
     private DragonCharacter character; //Поле не может быть null
+    //ok
     private Person killer; //Поле может быть null
 
     public void setId(long id) {
