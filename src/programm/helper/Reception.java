@@ -65,6 +65,7 @@ public class Reception {
                     maker.show();
                     break;
                 case "save":
+                    maker.save();
                     break;
                 case "remove_first":
                     maker.remove_first();
