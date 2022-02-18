@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import programm.defaults.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -14,6 +15,8 @@ import java.util.Scanner;
 public class Init {
     private final LinkedList<Dragon> dragons = new LinkedList<>();
     private final LinkedList<String> history_list = new LinkedList<>();
+    private final Gson gson = new Gson();
+    private Date initdate;
 
     /**
      * Метод, который поддерживает не более 15 элементов в истории.
@@ -94,8 +97,7 @@ public class Init {
      */
     public void show() {
         history_list.addFirst("show");
-        Gson kek = new Gson();
-        System.out.println(kek.toJson(dragons));
+        System.out.println(gson.toJson(dragons));
     }
 
     /**
@@ -108,7 +110,7 @@ public class Init {
         //создание нового объекта
         Dragon temp = new Dragon();
 
-        temp.setId(dragons.size() + 1);
+        temp.setId((long) (Math.random() * 543323));
 
         //присвоение имени дракона
         String tmp;
@@ -407,5 +409,26 @@ public class Init {
         history_list.addFirst("add");
         dragons.addFirst(this.newDragon(s));
         System.out.println("Элемент успешно добавлен");
+    }
+
+    /**
+     * Вывод информации о коллекции.
+     */
+    public void info() {
+        System.out.println("Тип коллекции: " + dragons.getClass() +
+                "\nДата инициализации: " + initdate +
+                "\nКоличество элементов: " + dragons.size());
+    }
+
+    /**
+     * Удаляет первый элемент коллекции.
+     */
+    public void remove_first() {
+        if (dragons.size() == 0)
+            System.out.println("Коллекция пуста");
+        else {
+            dragons.removeFirst();
+            System.out.println("Первый элемент успешно удален");
+        }
     }
 }

@@ -7,7 +7,6 @@ import java.util.Scanner;
  */
 public class Reception {
     private String sinp = "";
-    private String[] scom;
     private final Init maker;
 
     /**
@@ -27,7 +26,7 @@ public class Reception {
         while (!sinp.equals("exit")) {
 
             sinp = scanner.nextLine();
-            scom = sinp.trim().split(" ");
+            String[] scom = sinp.trim().split(" ");
 
             switch (scom[0]) {
                 case "":
@@ -45,6 +44,7 @@ public class Reception {
                     maker.add(scanner);
                     break;
                 case "info":
+                    maker.info();
                     break;
                 case "update":
                     break;
@@ -67,6 +67,7 @@ public class Reception {
                 case "save":
                     break;
                 case "remove_first":
+                    maker.remove_first();
                     break;
                 case "history":
                     maker.history();

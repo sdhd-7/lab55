@@ -1,7 +1,7 @@
 package programm.defaults;
 
 /**
- * Класс {@code enum Color} отвечает за цвет волос/глаз у драконо борца.
+ * Класс {@code enum Color} отвечает за цвет волос/глаз у драконоборца.
  */
 public enum Color {
     BLACK,
