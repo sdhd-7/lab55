@@ -1,4 +1,4 @@
-package defaults;
+package programm.defaults;
 
 public enum Country {
     GERMANY,

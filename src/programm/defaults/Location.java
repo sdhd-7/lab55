@@ -1,4 +1,4 @@
-package defaults;
+package programm.defaults;
 
 public class Location {
     private Long x; //Поле не может быть null

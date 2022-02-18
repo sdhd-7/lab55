@@ -1,4 +1,4 @@
-package defaults;
+package programm.defaults;
 
 import java.time.LocalDateTime;
 
@@ -39,12 +39,12 @@ public class Dragon {
         this.creationDate = creationDate;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public void setSpeaking(boolean speaking) {
         this.speaking = speaking;
+    }
+
+    public void setKiller(Person killer) {
+        this.killer = killer;
     }
 
     public void setType(DragonType type) {
@@ -55,7 +55,11 @@ public class Dragon {
         this.character = character;
     }
 
-    public void setKiller(Person killer) {
-        this.killer = killer;
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
