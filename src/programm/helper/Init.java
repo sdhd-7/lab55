@@ -397,6 +397,11 @@ public class Init {
         return temp;
     }
 
+    /**
+     * Добавление новго элемента в коллекцию.
+     *
+     * @param s поток ввода через консоль.
+     */
     public void add(Scanner s) {
         elhistory.addFirst("add");
         dragons.addFirst(this.newDragon(s));
