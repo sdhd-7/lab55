@@ -7,18 +7,25 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         LinkedList<Dragon> current = new LinkedList<>();
+        LinkedList<String> history = new LinkedList<>();
         Scanner scanner = new Scanner(System.in);
         String s;
         s = scanner.nextLine();
         while (!s.equals("exit")) {
 
+            if (history.size() == 15)
+                history.removeLast();
+
+
             String[] curr = s.split(" ");
+            history.addFirst(curr[0]);
             switch (curr[0]) {
                 case ("add"):
+
                     //создание нового объекта
                     Dragon temp = new Dragon();
 
-                    temp.setId(current.size() + 1);
+
 
                     //присвоение имени дракона
                     String tmp;
@@ -197,66 +204,73 @@ public class Main {
                         }
 
                         //eyes color
-                        fl = true;
-                        while (fl) {
-                            System.out.println("Выберите один из данных цветов зрачка драконоборца\n" +
-                                    "BLACK\n" +
-                                    "BLUE\n" +
-                                    "WHITE\n" +
-                                    "YELLOW\n" +
-                                    "BROWN");
-                            tmp = scanner.nextLine();
-                            fl = false;
-                            switch (tmp) {
-                                case "BLACK":
-                                    lol.setEyeColor(Color.BLACK);
-                                    break;
-                                case "BLUE":
-                                    lol.setEyeColor(Color.BLUE);
-                                    break;
-                                case "WHITE":
-                                    lol.setEyeColor(Color.WHITE);
-                                    break;
-                                case "YELLOW":
-                                    lol.setEyeColor(Color.YELLOW);
-                                    break;
-                                case "BROWN":
-                                    lol.setEyeColor(Color.BROWN);
-                                    break;
-                                case "":
-                                    lol.setEyeColor(null);
-                                    break;
-                                default:
-                                    fl = true;
-                                    break;
+                        {
+                            fl = true;
+
+                            while (fl) {
+                                System.out.println("Выберите один из данных цветов зрачка драконоборца\n" +
+                                        "BLACK\n" +
+                                        "BLUE\n" +
+                                        "WHITE\n" +
+                                        "YELLOW\n" +
+                                        "BROWN");
+                                tmp = scanner.nextLine();
+                                fl = false;
+                                switch (tmp) {
+                                    case "BLACK":
+                                        lol.setEyeColor(Color.BLACK);
+                                        break;
+                                    case "BLUE":
+                                        lol.setEyeColor(Color.BLUE);
+                                        break;
+                                    case "WHITE":
+                                        lol.setEyeColor(Color.WHITE);
+                                        break;
+                                    case "YELLOW":
+                                        lol.setEyeColor(Color.YELLOW);
+                                        break;
+                                    case "BROWN":
+                                        lol.setEyeColor(Color.BROWN);
+                                        break;
+                                    case "":
+                                        lol.setEyeColor(null);
+                                        break;
+                                    default:
+                                        fl = true;
+                                        break;
+                                }
+
                             }
                         }
 
                         //nationality
-                        fl = true;
-                        while (fl) {
-                            System.out.println("Выберите одну из данных национальностей драконоборца\n" +
-                                    "GERMANY\n" +
-                                    "ITALY\n" +
-                                    "SOUTH_KOREA");
-                            tmp = scanner.nextLine();
-                            fl = false;
-                            switch (tmp) {
-                                case "GERMANY":
-                                    lol.setNationality(Country.GERMANY);
-                                    break;
-                                case "ITALY":
-                                    lol.setNationality(Country.ITALY);
-                                    break;
-                                case "SOUTH_KOREA":
-                                    lol.setNationality(Country.SOUTH_KOREA);
-                                    break;
-                                case "":
-                                    lol.setHairColor(null);
-                                    break;
-                                default:
-                                    fl = true;
-                                    break;
+
+                        {
+                            fl = true;
+                            while (fl) {
+                                System.out.println("Выберите одну из данных национальностей драконоборца\n" +
+                                        "GERMANY\n" +
+                                        "ITALY\n" +
+                                        "SOUTH_KOREA");
+                                tmp = scanner.nextLine();
+                                fl = false;
+                                switch (tmp) {
+                                    case "GERMANY":
+                                        lol.setNationality(Country.GERMANY);
+                                        break;
+                                    case "ITALY":
+                                        lol.setNationality(Country.ITALY);
+                                        break;
+                                    case "SOUTH_KOREA":
+                                        lol.setNationality(Country.SOUTH_KOREA);
+                                        break;
+                                    case "":
+                                        lol.setHairColor(null);
+                                        break;
+                                    default:
+                                        fl = true;
+                                        break;
+                                }
                             }
                         }
 
@@ -330,6 +344,17 @@ public class Main {
                             "remove_all_by_type type : удалить из коллекции все элементы, значение поля type которого эквивалентно заданному\n" +
                             "count_by_age age : вывести количество элементов, значение поля age которых равно заданному\n" +
                             "filter_by_character character : вывести элементы, значение поля character которых равно заданному");
+                    break;
+
+                case "history":
+                    for (String c : history)
+                        System.out.println("-> " + c);
+                    break;
+
+
+                default:
+                    history.removeFirst();
+                    System.out.println("Данная команда не существует");
                     break;
 
 
