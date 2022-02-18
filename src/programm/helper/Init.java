@@ -3,6 +3,10 @@ package programm.helper;
 import com.google.gson.Gson;
 import programm.defaults.*;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.LinkedList;
@@ -415,6 +419,7 @@ public class Init {
      * Вывод информации о коллекции.
      */
     public void info() {
+        history_list.addFirst("info");
         System.out.println("Тип коллекции: " + dragons.getClass() +
                 "\nДата инициализации: " + initdate +
                 "\nКоличество элементов: " + dragons.size());
@@ -424,11 +429,26 @@ public class Init {
      * Удаляет первый элемент коллекции.
      */
     public void remove_first() {
+        history_list.addFirst("remove_last");
         if (dragons.size() == 0)
             System.out.println("Коллекция пуста");
         else {
             dragons.removeFirst();
             System.out.println("Первый элемент успешно удален");
+        }
+    }
+
+    /**
+     * Сохранят коллекцию в файл.
+     */
+    public void save() {
+        history_list.addFirst("save");
+        String filename = "C:\\Users\\adgjw\\IdeaProjects\\lab5\\data.json";
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename)))) {
+            writer.write(gson.toJson(dragons));
+            System.out.println("Данные успешно сохранены");
+        } catch (Exception ex) {
+            System.out.println("Коллекция не может быть записана в файл.");
         }
     }
 }
