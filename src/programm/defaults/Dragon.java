@@ -2,25 +2,45 @@ package programm.defaults;
 
 import java.time.LocalDateTime;
 
-
+/**
+ * Класс {@code Dragon} отвечает за информацию о драконах.
+ */
 public class Dragon {
-    //ok
+    /**
+     * Уникальный номер дракона.
+     */
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    //ok
+    /**
+     * Имя дракона.
+     */
     private String name; //Поле не может быть null, Строка не может быть пустой
-    //ok
+    /**
+     * Месторасположение дракона.
+     */
     private Coordinates coordinates; //Поле не может быть null
-    //ok
+    /**
+     * Дата и время создание экземпляра.
+     */
     private java.time.LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    //ok
+    /**
+     * Возраст дракона.
+     */
     private int age; //Значение поля должно быть больше 0
-    //ok
+    /**
+     * Флаг, умеет ли дракон разговаривать.
+     */
     private boolean speaking;
-    //ok
+    /**
+     * Типа дракона.
+     */
     private DragonType type; //Поле не может быть null
-    //ok
+    /**
+     * Характер дракона.
+     */
     private DragonCharacter character; //Поле не может быть null
-    //ok
+    /**
+     * Информация о драконоборце.
+     */
     private Person killer; //Поле может быть null
 
     public void setId(long id) {

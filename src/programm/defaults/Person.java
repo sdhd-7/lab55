@@ -1,17 +1,32 @@
 package programm.defaults;
 
+/**
+ * Класс отвечает за всю информацию о драконоборце.
+ */
 public class Person {
-    //ok
+    /**
+     * Имя драконоборца.
+     */
     private String name; //Поле не может быть null, Строка не может быть пустой
-    //ok
+    /**
+     * Номер паспорта драконоборца.
+     */
     private String passportID; //Строка не может быть пустой, Длина строки не должна быть больше 34, Длина строки должна быть не меньше 4, Поле может быть null
-    //ok
+    /**
+     * Цвет глаз драконоборца.
+     */
     private Color eyeColor; //Поле может быть null
-    //ok
+    /**
+     * Цвет волос драконоборца.
+     */
     private Color hairColor; //Поле может быть null
-    //ok
+    /**
+     * Национальность драконоборца.
+     */
     private Country nationality; //Поле может быть null
-    //ok but not null exc
+    /**
+     * Месторасположение драконоборца.
+     */
     private Location location; //Поле может быть null
 
     public void setName(String name) {

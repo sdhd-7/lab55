@@ -13,14 +13,14 @@ import java.util.Scanner;
 
 public class Init {
     private final LinkedList<Dragon> dragons = new LinkedList<>();
-    private final LinkedList<String> elhistory = new LinkedList<>();
+    private final LinkedList<String> history_list = new LinkedList<>();
 
     /**
      * Метод, который поддерживает не более 15 элементов в истории.
      */
     private void historyCheck() {
-        while (elhistory.size() > 15) {
-            elhistory.removeLast();
+        while (history_list.size() > 15) {
+            history_list.removeLast();
         }
     }
 
@@ -35,7 +35,7 @@ public class Init {
      * Выводит список доступных команд для пользователя.
      */
     public void help() {
-        elhistory.addFirst("help");
+        history_list.addFirst("help");
         System.out.println("info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)\n" +
                 "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении\n" +
                 "add {element} : добавить новый элемент в коллекцию\n" +
@@ -57,7 +57,7 @@ public class Init {
      * Удаляет все элементы из коллекции.
      */
     public void clear() {
-        elhistory.addFirst("clear");
+        history_list.addFirst("clear");
         dragons.clear();
         System.out.println("Коллекция успешно очищена");
     }
@@ -68,11 +68,11 @@ public class Init {
     public void history() {
         historyCheck();
         int ind = 1;
-        for (String tmp : elhistory) {
+        for (String tmp : history_list) {
             System.out.println(ind + ") ->" + tmp);
             ind++;
         }
-        elhistory.addFirst("history");
+        history_list.addFirst("history");
     }
 
     /**
@@ -93,7 +93,7 @@ public class Init {
      * Выводит все объекты коллекции в консоль.
      */
     public void show() {
-        elhistory.addFirst("show");
+        history_list.addFirst("show");
         Gson kek = new Gson();
         System.out.println(kek.toJson(dragons));
     }
@@ -108,6 +108,7 @@ public class Init {
         //создание нового объекта
         Dragon temp = new Dragon();
 
+        temp.setId(dragons.size() + 1);
 
         //присвоение имени дракона
         String tmp;
@@ -144,7 +145,7 @@ public class Init {
         }
         temp.setSpeaking(tmp.equals("Y"));
 
-        //coord x y
+        //coordinates x y
         System.out.println("Введите координату X: ");
         long x = Long.parseLong(scanner.nextLine());
         while (x <= -198) {
@@ -397,8 +398,13 @@ public class Init {
         return temp;
     }
 
+    /**
+     * Добавление нового элемента в коллекцию.
+     *
+     * @param s поток ввода через консоль.
+     */
     public void add(Scanner s) {
-        elhistory.addFirst("add");
+        history_list.addFirst("add");
         dragons.addFirst(this.newDragon(s));
         System.out.println("Элемент успешно добавлен");
     }
