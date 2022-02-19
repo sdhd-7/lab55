@@ -1,12 +1,12 @@
 package programm.helper;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import programm.defaults.*;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Date;
@@ -21,7 +21,17 @@ public class Init {
     private final LinkedList<Dragon> dragons = new LinkedList<>();
     private final LinkedList<String> history_list = new LinkedList<>();
     private final Gson gson = new Gson();
-    private Date initdate;
+    private boolean wasStart = false;
+    private final String filename;
+    private final Date initdate;
+
+    public Init(String filename) throws IOException {
+        this.filename = filename;
+        System.out.println(filename);
+        this.initdate = new Date();
+        this.load();
+        wasStart = true;
+    }
 
     /**
      * Метод, который поддерживает не более 15 элементов в истории.
@@ -445,7 +455,6 @@ public class Init {
      */
     public void save() {
         history_list.addFirst("save");
-        String filename = "C:\\Users\\adgjw\\IdeaProjects\\lab5\\data.json";
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename)))) {
             writer.write(gson.toJson(dragons));
             System.out.println("Данные успешно сохранены");
@@ -454,6 +463,11 @@ public class Init {
         }
     }
 
+    /**
+     * Добавляет в коллекцию новый элемент, если он больше максимального.
+     *
+     * @param sc Поток ввода из консоли.
+     */
     public void add_if_max(Scanner sc) {
         history_list.addFirst("add_if_max");
         if (dragons.size() != 0) {
@@ -464,5 +478,57 @@ public class Init {
                 System.out.println("Элемент успешно добавлен.");
             } else System.out.println("Не удалось добавить элемент.");
         } else System.out.println("Элемент не с чем сравнивать. Коллекция пуста.");
+    }
+
+    /**
+     * Загружает данные о коллекции из файла формата json.
+     *
+     * @throws IOException Выбрасывает ошибки связанные с работой файла.
+     */
+    public void load() throws IOException {
+        history_list.addFirst("load");
+        int beginSize = dragons.size();
+        File jsonCollection = new File(filename);
+        try {
+            if (!jsonCollection.exists()) throw new FileNotFoundException();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Файла по указанному пути не существует.");
+            if (!wasStart) System.exit(1);
+            else return;  //без return выкидывает exception, если удалить файл во время работы программы и вызвать load
+        }
+        try {
+            if (!jsonCollection.canRead() || !jsonCollection.canWrite()) throw new SecurityException();
+        } catch (SecurityException ex) {
+            System.out.println("Файл защищён от чтения и/или записи. Для работы программы нужны оба разрешения.");
+            if (!wasStart) System.exit(1);
+            else return; //без return выкидывает exception, если удалить файл во время работы программы и вызвать load
+        }
+        try {
+            if (jsonCollection.length() == 0) throw new JsonSyntaxException("");
+        } catch (JsonSyntaxException ex) {
+            System.out.println("Файл пуст.");
+            if (!wasStart) System.exit(1);
+            else return; //без return выкидывает exception, если удалить файл во время работы программы и вызвать load
+        }
+        try (BufferedReader inputStreamReader = new BufferedReader(new InputStreamReader(new FileInputStream(jsonCollection)))) {
+            System.out.println("Идёт загрузка коллекции " + jsonCollection.getAbsolutePath());
+            String nextLine;
+            StringBuilder result = new StringBuilder();
+            while ((nextLine = inputStreamReader.readLine()) != null) {
+                result.append(nextLine);
+            }
+            Type collectionType = new TypeToken<LinkedList<Dragon>>() {
+            }.getType();
+            try {
+                LinkedList<Dragon> addedDragon = gson.fromJson(result.toString(), collectionType);
+                for (Dragon s : addedDragon) {
+                    if (!dragons.contains(s)) dragons.add(s);
+                }
+            } catch (JsonSyntaxException ex) {
+                System.out.println("Ошибка синтаксиса Json. Коллекция не может быть загружена.");
+                System.exit(1);
+            }
+            System.out.println("Коллекций успешно загружена. Добавлено " + (dragons.size() - beginSize) + " элементов.");
+        }
     }
 }
