@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -101,7 +102,8 @@ public class Init {
      */
     public void show() {
         history_list.addFirst("show");
-        System.out.println(gson.toJson(dragons));
+        for (Dragon tmp : dragons)
+            System.out.println(gson.toJson(tmp));
     }
 
     /**
@@ -450,5 +452,17 @@ public class Init {
         } catch (Exception ex) {
             System.out.println("Коллекция не может быть записана в файл.");
         }
+    }
+
+    public void add_if_max(Scanner sc) {
+        history_list.addFirst("add_if_max");
+        if (dragons.size() != 0) {
+            Dragon mainCompetitor = newDragon(sc);
+            Dragon competitor = Collections.max(dragons);
+            if (competitor.compareTo(mainCompetitor) < 0) {
+                dragons.add(mainCompetitor);
+                System.out.println("Элемент успешно добавлен.");
+            } else System.out.println("Не удалось добавить элемент.");
+        } else System.out.println("Элемент не с чем сравнивать. Коллекция пуста.");
     }
 }

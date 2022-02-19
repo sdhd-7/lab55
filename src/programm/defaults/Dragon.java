@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * Класс {@code Dragon} отвечает за информацию о драконах.
  */
-public class Dragon {
+public class Dragon implements Comparable<Dragon> {
     /**
      * Уникальный номер дракона.
      */
@@ -81,5 +81,18 @@ public class Dragon {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    @Override
+    public int compareTo(Dragon o) {
+        int tmp = -o.getAge() + this.getAge();
+        if (tmp != 0)
+            return tmp;
+        return (int) (-o.getId() + this.getId());
+
     }
 }

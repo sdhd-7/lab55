@@ -53,6 +53,7 @@ public class Reception {
                 case "execute_script":
                     break;
                 case "add_if_max":
+                    maker.add_if_max(scanner);
                     break;
                 case "remove_all_by_type":
                     break;
