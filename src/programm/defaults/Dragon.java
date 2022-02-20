@@ -87,6 +87,14 @@ public class Dragon implements Comparable<Dragon> {
         return id;
     }
 
+    public DragonCharacter getCharacter() {
+        return character;
+    }
+
+    public DragonType getType() {
+        return type;
+    }
+
     @Override
     public int compareTo(Dragon o) {
         int tmp = -o.getAge() + this.getAge();

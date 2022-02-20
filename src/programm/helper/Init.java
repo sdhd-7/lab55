@@ -21,16 +21,14 @@ public class Init {
     private final LinkedList<Dragon> dragons = new LinkedList<>();
     private final LinkedList<String> history_list = new LinkedList<>();
     private final Gson gson = new Gson();
-    private boolean wasStart = false;
     private final String filename;
     private final Date initdate;
 
-    public Init(String filename) throws IOException {
+    public Init(String filename) {
         this.filename = filename;
         System.out.println(filename);
         this.initdate = new Date();
         this.load();
-        wasStart = true;
     }
 
     /**
@@ -482,41 +480,17 @@ public class Init {
 
     /**
      * Загружает данные о коллекции из файла формата json.
-     *
-     * @throws IOException Выбрасывает ошибки связанные с работой файла.
      */
-    private void load() throws IOException {
+    private void load() {
         history_list.addFirst("load");
         int beginSize = dragons.size();
-        File jsonCollection = new File(filename);
-        try {
-            if (!jsonCollection.exists()) throw new FileNotFoundException();
-        } catch (FileNotFoundException ex) {
-            System.out.println("Файла по указанному пути не существует.");
-            if (!wasStart) System.exit(1);
-            else return;  //без return выкидывает exception, если удалить файл во время работы программы и вызвать load
-        }
-        try {
-            if (!jsonCollection.canRead() || !jsonCollection.canWrite()) throw new SecurityException();
-        } catch (SecurityException ex) {
-            System.out.println("Файл защищён от чтения и/или записи. Для работы программы нужны оба разрешения.");
-            if (!wasStart) System.exit(1);
-            else return; //без return выкидывает exception, если удалить файл во время работы программы и вызвать load
-        }
-        try {
-            if (jsonCollection.length() == 0) throw new JsonSyntaxException("");
-        } catch (JsonSyntaxException ex) {
-            System.out.println("Файл пуст.");
-            if (!wasStart) System.exit(1);
-            else return; //без return выкидывает exception, если удалить файл во время работы программы и вызвать load
-        }
-        try (BufferedReader inputStreamReader = new BufferedReader(new InputStreamReader(new FileInputStream(jsonCollection)))) {
-            System.out.println("Идёт загрузка коллекции " + jsonCollection.getAbsolutePath());
+        try (BufferedReader inputStreamReader = new BufferedReader(new InputStreamReader(new FileInputStream(filename)))) {
+            System.out.println("Идёт загрузка коллекции " + filename);
             String nextLine;
             StringBuilder result = new StringBuilder();
-            while ((nextLine = inputStreamReader.readLine()) != null) {
+            while ((nextLine = inputStreamReader.readLine()) != null)
                 result.append(nextLine);
-            }
+
             Type collectionType = new TypeToken<LinkedList<Dragon>>() {
             }.getType();
             try {
@@ -528,7 +502,82 @@ public class Init {
                 System.out.println("Ошибка синтаксиса Json. Коллекция не может быть загружена.");
                 System.exit(1);
             }
-            System.out.println("Коллекций успешно загружена. Добавлено " + (dragons.size() - beginSize) + " элементов.");
+            System.out.println("Коллекция успешно загружена. Добавлено " + (dragons.size() - beginSize) + " элементов.");
+        } catch (Exception ex) {
+            System.out.println("Файл не существует или недоступен для чтения.");
+            System.exit(1);
         }
+    }
+
+    /**
+     * Удаляет элемент из коллекции с заданным {@code id}.
+     *
+     * @param id - id элемента, который нужно удалить.
+     */
+    public void remove_by_id(long id) {
+        history_list.addFirst("remove_by_id");
+        int tmp = dragons.size();
+        dragons.removeIf(p -> p.getId() == id);
+        if (tmp == dragons.size())
+            System.out.println("В коллекции нет элемента с id " + id);
+        else
+            System.out.println("Элемент успешно удален");
+    }
+
+    /**
+     * Выводит в консоль всех драконов с заданным характером.
+     *
+     * @param tmp - заданный характер.
+     */
+    public void filter_by_character(String tmp) {
+        history_list.addFirst("filter_by_character");
+        DragonCharacter lol = null;
+        switch (tmp) {
+            case "EVIL":
+                lol = DragonCharacter.EVIL;
+                break;
+            case "WISE":
+                lol = DragonCharacter.WISE;
+                break;
+            case "CHAOTIC_EVIL":
+                lol = DragonCharacter.CHAOTIC_EVIL;
+                break;
+            case "FICKLE":
+                lol = DragonCharacter.FICKLE;
+                break;
+            default:
+                System.out.println("Вы указали неверный характер дракона." +
+                        "Выберите один из данных характеров дракона:\n" +
+                        "WISE\n" +
+                        "EVIL\n" +
+                        "CHAOTIC_EVIL\n" +
+                        "FICKLE");
+                return;
+        }
+        int k = 0;
+        for (Dragon c : dragons) {
+            if (c.getCharacter().equals(lol)) {
+                System.out.println(gson.toJson(c));
+                k++;
+            }
+        }
+        if (k == 0)
+            System.out.println("В наборе нет драконов с данным характером.");
+
+    }
+
+    /**
+     * Удаляет из коллекции все элементы, у которых данный тип.
+     *
+     * @param s - данный тип.
+     */
+    public void remove_all_by_type(String s) {
+        history_list.addFirst("remove_all_by_type");
+        int tmp = dragons.size();
+        dragons.removeIf(p -> s.equals(p.getType().toString()));
+        if (tmp == dragons.size())
+            System.out.println("В коллекции нет драконов с таким типом или тип был введен неверно.");
+        else
+            System.out.println("Было удалено " + (tmp - dragons.size()) + " элементов.");
     }
 }

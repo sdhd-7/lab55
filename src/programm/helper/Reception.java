@@ -49,6 +49,7 @@ public class Reception {
                 case "update":
                     break;
                 case "remove_by_id":
+                    maker.remove_by_id(Long.parseLong(scom[1]));
                     break;
                 case "execute_script":
                     break;
@@ -56,11 +57,13 @@ public class Reception {
                     maker.add_if_max(scanner);
                     break;
                 case "remove_all_by_type":
+                    maker.remove_all_by_type(scom[1]);
                     break;
                 case "count_by_age":
                     maker.count_by_age(Integer.parseInt(scom[1]));
                     break;
                 case "filter_by_character":
+                    maker.filter_by_character(scom[1]);
                     break;
                 case "show":
                     maker.show();
