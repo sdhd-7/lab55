@@ -6,7 +6,7 @@ import programm.helper.Reception;
 import java.io.IOException;
 
 /**
- * @author Mikhail Gorbatov 336498
+ * Класс для запуска интерактивного режима взаимодействия.
  */
 public class Main {
     public static void main(String[] args) throws IOException {

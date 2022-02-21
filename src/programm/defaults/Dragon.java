@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 /**
  * Класс {@code Dragon} отвечает за информацию о драконах.
  */
+@SuppressWarnings("ALL")
 public class Dragon implements Comparable<Dragon> {
     /**
      * Уникальный номер дракона.
@@ -43,10 +44,6 @@ public class Dragon implements Comparable<Dragon> {
      */
     private Person killer; //Поле может быть null
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -67,14 +64,6 @@ public class Dragon implements Comparable<Dragon> {
         this.killer = killer;
     }
 
-    public void setType(DragonType type) {
-        this.type = type;
-    }
-
-    public void setCharacter(DragonCharacter character) {
-        this.character = character;
-    }
-
     public int getAge() {
         return age;
     }
@@ -87,12 +76,24 @@ public class Dragon implements Comparable<Dragon> {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public DragonCharacter getCharacter() {
         return character;
     }
 
+    public void setCharacter(DragonCharacter character) {
+        this.character = character;
+    }
+
     public DragonType getType() {
         return type;
+    }
+
+    public void setType(DragonType type) {
+        this.type = type;
     }
 
     @Override

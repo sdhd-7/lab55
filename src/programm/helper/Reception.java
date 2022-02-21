@@ -7,8 +7,8 @@ import java.util.Scanner;
  * Класс {@code Reception} выполняет считывание команд пользователя из консоли.
  */
 public class Reception {
-    private String sinp = "";
     private final Init maker;
+    private String sinp = "";
 
     /**
      * Добавляет объект управления коллекцией.
