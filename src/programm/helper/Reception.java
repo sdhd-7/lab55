@@ -47,11 +47,13 @@ public class Reception {
                     maker.info();
                     break;
                 case "update":
+                    maker.update(Long.parseLong(scom[1]), scanner);
                     break;
                 case "remove_by_id":
                     maker.remove_by_id(Long.parseLong(scom[1]));
                     break;
                 case "execute_script":
+                    /// TODO: 21.02.2022 добавить execute ЖОПА
                     break;
                 case "add_if_max":
                     maker.add_if_max(scanner);

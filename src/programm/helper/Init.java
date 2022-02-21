@@ -531,38 +531,21 @@ public class Init {
      */
     public void filter_by_character(String tmp) {
         history_list.addFirst("filter_by_character");
-        DragonCharacter lol = null;
-        switch (tmp) {
-            case "EVIL":
-                lol = DragonCharacter.EVIL;
-                break;
-            case "WISE":
-                lol = DragonCharacter.WISE;
-                break;
-            case "CHAOTIC_EVIL":
-                lol = DragonCharacter.CHAOTIC_EVIL;
-                break;
-            case "FICKLE":
-                lol = DragonCharacter.FICKLE;
-                break;
-            default:
-                System.out.println("Вы указали неверный характер дракона." +
-                        "Выберите один из данных характеров дракона:\n" +
-                        "WISE\n" +
-                        "EVIL\n" +
-                        "CHAOTIC_EVIL\n" +
-                        "FICKLE");
-                return;
-        }
         int k = 0;
         for (Dragon c : dragons) {
-            if (c.getCharacter().equals(lol)) {
-                System.out.println(gson.toJson(c));
+            if (tmp.equals(c.getCharacter().toString())) {
                 k++;
+                System.out.println(k + ") " + gson.toJson(c));
             }
         }
-        if (k == 0)
-            System.out.println("В наборе нет драконов с данным характером.");
+        if (k == 0) {
+            System.out.println("В наборе нет драконов с данным характером или вы указали неверный характер.");
+            System.out.println("Ниже список существующих характеров:" +
+                    "WISE\n" +
+                    "EVIL\n" +
+                    "CHAOTIC_EVIL\n" +
+                    "FICKLE");
+        }
 
     }
 
@@ -579,5 +562,29 @@ public class Init {
             System.out.println("В коллекции нет драконов с таким типом или тип был введен неверно.");
         else
             System.out.println("Было удалено " + (tmp - dragons.size()) + " элементов.");
+    }
+
+    /**
+     * Обновляет элемент коллекции с нужным id.
+     *
+     * @param id элемента который нужно обновить.
+     * @param s  Поток ввода из консоли.
+     */
+    public void update(Long id, Scanner s) {
+        history_list.addFirst("update");
+        int ind = -1;
+        for (int i = 0; i < dragons.size(); ++i) {
+            if (dragons.get(i).getId() == id) {
+                ind = i;
+                break;
+            }
+        }
+        if (ind == -1) {
+            System.out.println("В коллекции нет элемента с id " + id);
+        }
+        Dragon tmp = newDragon(s);
+        tmp.setId(id);
+        dragons.set(ind, tmp);
+        System.out.println("Элемент с id " + id + " успешно обновлен.");
     }
 }
