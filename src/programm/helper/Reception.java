@@ -1,5 +1,6 @@
 package programm.helper;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -21,9 +22,9 @@ public class Reception {
     /**
      * Метод, который преобразует команды пользователя в команды для класса управления коллекцией {@code Init}
      */
-    public void go() {
+    public void go() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        while (!sinp.equals("exit")) {
+        while (scanner.hasNextLine()) {
 
             sinp = scanner.nextLine();
             String[] scom = sinp.trim().split(" ");
@@ -53,7 +54,7 @@ public class Reception {
                     maker.remove_by_id(Long.parseLong(scom[1]));
                     break;
                 case "execute_script":
-                    /// TODO: 21.02.2022 добавить execute ЖОПА
+                    maker.execute_script(scom[1]);
                     break;
                 case "add_if_max":
                     maker.add_if_max(scanner);

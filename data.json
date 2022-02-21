@@ -1,55 +1,154 @@
 [
   {
-    "id": 229280,
-    "name": "2131231231",
+    "id": 146350,
+    "name": "Шерстяной Ветродуй",
     "coordinates": {
-      "x": 123,
-      "y": 123
+      "x": 2,
+      "y": 1
     },
     "creationDate": {
       "date": {
         "year": 2022,
         "month": 2,
-        "day": 19
+        "day": 21
       },
       "time": {
-        "hour": 1,
-        "minute": 25,
-        "second": 0,
-        "nano": 22000000
+        "hour": 20,
+        "minute": 48,
+        "second": 17,
+        "nano": 385000000
       }
     },
-    "age": 2431231,
-    "speaking": false,
-    "type": "WATER",
-    "character": "WISE"
-  },
-  {
-    "id": 10353,
-    "name": "23",
-    "coordinates": {
-      "x": 1,
-      "y": 2
-    },
-    "creationDate": {
-      "date": {
-        "year": 2022,
-        "month": 2,
-        "day": 19
-      },
-      "time": {
-        "hour": 1,
-        "minute": 24,
-        "second": 26,
-        "nano": 951000000
-      }
-    },
-    "age": 23,
+    "age": 782,
     "speaking": true,
     "type": "WATER",
     "character": "WISE",
     "killer": {
-      "name": "123"
+      "name": "Ленивый Клинок",
+      "eyeColor": "BROWN",
+      "hairColor": "BLUE",
+      "nationality": "SOUTH_KOREA",
+      "location": {
+        "x": 5,
+        "y": 2,
+        "name": "Azir"
+      }
     }
+  },
+  {
+    "id": 486094,
+    "name": "Grand Templar",
+    "coordinates": {
+      "x": 935,
+      "y": 37
+    },
+    "creationDate": {
+      "date": {
+        "year": 2022,
+        "month": 2,
+        "day": 21
+      },
+      "time": {
+        "hour": 20,
+        "minute": 47,
+        "second": 31,
+        "nano": 266000000
+      }
+    },
+    "age": 13,
+    "speaking": false,
+    "type": "FIRE",
+    "character": "FICKLE"
+  },
+  {
+    "id": 275465,
+    "name": "Lolka",
+    "coordinates": {
+      "x": 34,
+      "y": 789
+    },
+    "creationDate": {
+      "date": {
+        "year": 2022,
+        "month": 2,
+        "day": 21
+      },
+      "time": {
+        "hour": 20,
+        "minute": 41,
+        "second": 26,
+        "nano": 252000000
+      }
+    },
+    "age": 1594,
+    "speaking": true,
+    "type": "UNDERGROUND",
+    "character": "CHAOTIC_EVIL",
+    "killer": {
+      "name": "Ranger",
+      "eyeColor": "WHITE",
+      "hairColor": "BLUE",
+      "nationality": "ITALY"
+    }
+  },
+  {
+    "id": 73617,
+    "name": "Belka",
+    "coordinates": {
+      "x": 23,
+      "y": 11
+    },
+    "creationDate": {
+      "date": {
+        "year": 2022,
+        "month": 2,
+        "day": 21
+      },
+      "time": {
+        "hour": 20,
+        "minute": 40,
+        "second": 12,
+        "nano": 901000000
+      }
+    },
+    "age": 3,
+    "speaking": false,
+    "type": "AIR",
+    "character": "FICKLE",
+    "killer": {
+      "name": "Анатолий",
+      "passportID": "",
+      "eyeColor": "BLACK",
+      "location": {
+        "x": 54,
+        "y": 66,
+        "name": "Церковь"
+      }
+    }
+  },
+  {
+    "id": 348819,
+    "name": "Кепчуп",
+    "coordinates": {
+      "x": 235,
+      "y": 19
+    },
+    "creationDate": {
+      "date": {
+        "year": 2022,
+        "month": 2,
+        "day": 21
+      },
+      "time": {
+        "hour": 20,
+        "minute": 39,
+        "second": 40,
+        "nano": 703000000
+      }
+    },
+    "age": 250,
+    "speaking": true,
+    "type": "WATER",
+    "character": "WISE"
   }
 ]

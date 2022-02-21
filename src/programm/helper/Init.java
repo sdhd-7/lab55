@@ -7,6 +7,8 @@ import programm.defaults.*;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Date;
@@ -16,7 +18,6 @@ import java.util.Scanner;
 /**
  * Выполняет команды по обработке коллекции.
  */
-
 public class Init {
     private final LinkedList<Dragon> dragons = new LinkedList<>();
     private final LinkedList<String> history_list = new LinkedList<>();
@@ -110,6 +111,7 @@ public class Init {
      */
     public void show() {
         history_list.addFirst("show");
+        System.out.println("В коллекции " + dragons.size() + " элементов.");
         for (Dragon tmp : dragons)
             System.out.println(gson.toJson(tmp));
     }
@@ -156,7 +158,7 @@ public class Init {
         System.out.println("Умеет ли дракон разговаривать Y/N?: ");
         tmp = scanner.nextLine();
         while (!(tmp.equals("Y") || tmp.equals("N"))) {
-            System.out.println("Умеет ли дракон разговаривать, введите Y/n?: ");
+            System.out.println("Умеет ли дракон разговаривать, введите Y/N?: ");
             tmp = scanner.nextLine();
         }
         temp.setSpeaking(tmp.equals("Y"));
@@ -586,5 +588,99 @@ public class Init {
         tmp.setId(id);
         dragons.set(ind, tmp);
         System.out.println("Элемент с id " + id + " успешно обновлен.");
+    }
+
+    /**
+     * Добавляет элемент в коллекцию из формата JSON.
+     *
+     * @param s - элемент в формате JSON.
+     */
+    private void addJson(String s) {
+        dragons.add(gson.fromJson(s, Dragon.class));
+    }
+
+    /**
+     * Обновляет элемент коллекции с нужным id.
+     *
+     * @param id элемента который нужно обновить.
+     * @param s  - элемент в формате JSON.
+     */
+    private void updateJson(long id, String s) {
+        int ind = -1;
+        for (int i = 0; i < dragons.size(); ++i) {
+            if (dragons.get(i).getId() == id) {
+                ind = i;
+                break;
+            }
+        }
+        Dragon tmp = gson.fromJson(s, Dragon.class);
+        tmp.setId(id);
+        dragons.set(ind, tmp);
+    }
+
+    /**
+     * Добавляет в коллекцию новый элемент, если он больше максимального.
+     *
+     * @param s Элемент в формате JSON.
+     */
+    public void add_if_maxJson(String s) {
+        history_list.addFirst("add_if_max");
+        Dragon mainCompetitor = gson.fromJson(s, Dragon.class);
+        Dragon competitor = Collections.max(dragons);
+        if (competitor.compareTo(mainCompetitor) < 0) {
+            dragons.add(mainCompetitor);
+        }
+    }
+
+    /**
+     * Считывает и выполняет команды из файла.
+     *
+     * @param s - путь к файлу.
+     */
+    public void execute_script(String s) throws IOException {
+        history_list.addFirst("execute_script");
+        Path kek = Paths.get(s);
+        Scanner fl = new Scanner(kek);
+        String sinp;
+        while (fl.hasNextLine()) {
+            sinp = fl.nextLine();
+            String[] scom = sinp.trim().split(" ");
+            //System.out.println("****" + scom[0]);
+            switch (scom[0]) {
+                case "":
+                    break;
+                case "exit":
+                    this.exit();
+                    break;
+                case "clear":
+                    this.clear();
+                    break;
+                case "add":
+                    this.addJson(fl.nextLine());
+                    break;
+                case "update":
+                    this.updateJson(Long.parseLong(scom[1]), fl.nextLine());
+                    break;
+                case "remove_by_id":
+                    this.remove_by_id(Long.parseLong(scom[1]));
+                    break;
+                case "add_if_max":
+                    this.add_if_maxJson(fl.nextLine());
+                    break;
+                case "remove_all_by_type":
+                    this.remove_all_by_type(scom[1]);
+                    break;
+                case "save":
+                    this.save();
+                    break;
+                case "remove_first":
+                    this.remove_first();
+                    break;
+                default:
+                    System.out.println("Введена неверная команда, Чтение из файла невозможно.");
+                    return;
+            }
+            System.out.println("Скрипт успешно обработан.");
+        }
     }
 }
