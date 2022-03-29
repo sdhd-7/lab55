@@ -61,9 +61,17 @@ public class Reception {
                     maker.add(scanner);
                     break;
                 case "info":
+                    if (scom.length != 1) {
+                        maker.wrong();
+                        break;
+                    }
                     maker.info();
                     break;
                 case "update":
+                    if (scom.length != 2) {
+                        maker.wrong();
+                        break;
+                    }
                     try {
                         maker.update(Long.parseLong(scom[1]), scanner);
                     } catch (Exception ex) {
@@ -71,6 +79,10 @@ public class Reception {
                     }
                     break;
                 case "remove_by_id":
+                    if (scom.length != 2) {
+                        maker.wrong();
+                        break;
+                    }
                     try {
                         maker.remove_by_id(Long.parseLong(scom[1]));
                     } catch (Exception ex) {
@@ -92,9 +104,17 @@ public class Reception {
                     maker.add_if_max(scanner);
                     break;
                 case "remove_all_by_type":
+                    if (scom.length != 2) {
+                        maker.wrong();
+                        break;
+                    }
                     maker.remove_all_by_type(scom[1]);
                     break;
                 case "count_by_age":
+                    if (scom.length != 2) {
+                        maker.wrong();
+                        break;
+                    }
                     try {
                         maker.count_by_age(Integer.parseInt(scom[1]));
                     } catch (Exception ex) {
@@ -102,6 +122,10 @@ public class Reception {
                     }
                     break;
                 case "filter_by_character":
+                    if (scom.length != 1) {
+                        maker.wrong();
+                        break;
+                    }
                     maker.filter_by_character(scom[1]);
                     break;
                 case "show":

@@ -266,41 +266,44 @@ public class Init {
                 System.out.println("количество символов в паспорте должно быть не меньше 4 и не больше 34, введите паспорт: ");
                 tmp = scanner.nextLine();
             }
-            lol.setPassportID(tmp.length() == 0 ? tmp : null);
+            if (tmp.length() != 0)
+                lol.setPassportID(tmp);
 
             //hair color
-            fl = true;
-            while (fl) {
-                System.out.println("Выберите один из данных цветов волос драконоборца\n" +
-                        "BLACK\n" +
-                        "BLUE\n" +
-                        "WHITE\n" +
-                        "YELLOW\n" +
-                        "BROWN");
-                tmp = scanner.nextLine();
-                fl = false;
-                switch (tmp) {
-                    case "BLACK":
-                        lol.setHairColor(Color.BLACK);
-                        break;
-                    case "BLUE":
-                        lol.setHairColor(Color.BLUE);
-                        break;
-                    case "WHITE":
-                        lol.setHairColor(Color.WHITE);
-                        break;
-                    case "YELLOW":
-                        lol.setHairColor(Color.YELLOW);
-                        break;
-                    case "BROWN":
-                        lol.setHairColor(Color.BROWN);
-                        break;
-                    case "":
-                        lol.setHairColor(null);
-                        break;
-                    default:
-                        fl = true;
-                        break;
+            {
+                fl = true;
+                while (fl) {
+                    System.out.println("Выберите один из данных цветов волос драконоборца\n" +
+                            "BLACK\n" +
+                            "BLUE\n" +
+                            "WHITE\n" +
+                            "YELLOW\n" +
+                            "BROWN");
+                    tmp = scanner.nextLine();
+                    fl = false;
+                    switch (tmp) {
+                        case "BLACK":
+                            lol.setHairColor(Color.BLACK);
+                            break;
+                        case "BLUE":
+                            lol.setHairColor(Color.BLUE);
+                            break;
+                        case "WHITE":
+                            lol.setHairColor(Color.WHITE);
+                            break;
+                        case "YELLOW":
+                            lol.setHairColor(Color.YELLOW);
+                            break;
+                        case "BROWN":
+                            lol.setHairColor(Color.BROWN);
+                            break;
+                        case "":
+                            lol.setHairColor(null);
+                            break;
+                        default:
+                            fl = true;
+                            break;
+                    }
                 }
             }
 
@@ -376,40 +379,42 @@ public class Init {
             }
 
             //location
-            System.out.println("Знаете ли вы месторасположение драконоборца? Y/N");
+            {
+                System.out.println("Знаете ли вы месторасположение драконоборца? Y/N");
 
-            tmp = scanner.nextLine();
-            while (!(tmp.equals("Y") || tmp.equals("N"))) {
-                System.out.println("Знаете ли вы месторасположение драконоборца, введите Y/N?: ");
                 tmp = scanner.nextLine();
-            }
-            if (tmp.equals("N")) {
-                lol.setLocation(null);
-            } else {
-                System.out.println("Введите координату X: ");
-                tmp = scanner.nextLine();
-                while (tmp.equals("")) {
-
+                while (!(tmp.equals("Y") || tmp.equals("N"))) {
+                    System.out.println("Знаете ли вы месторасположение драконоборца, введите Y/N?: ");
+                    tmp = scanner.nextLine();
+                }
+                if (tmp.equals("N")) {
+                    lol.setLocation(null);
+                } else {
                     System.out.println("Введите координату X: ");
                     tmp = scanner.nextLine();
-                }
-                x = Long.parseLong(tmp);
-                System.out.println("Введите координату Y: ");
-                tmp = scanner.nextLine();
-                while (tmp.equals("")) {
+                    while (tmp.equals("")) {
 
+                        System.out.println("Введите координату X: ");
+                        tmp = scanner.nextLine();
+                    }
+                    x = Long.parseLong(tmp);
                     System.out.println("Введите координату Y: ");
                     tmp = scanner.nextLine();
-                }
-                y = Long.parseLong(tmp);
-                System.out.println("Укажите название местности: ");
-                tmp = scanner.nextLine();
-                while (tmp.equals("")) {
+                    while (tmp.equals("")) {
 
+                        System.out.println("Введите координату Y: ");
+                        tmp = scanner.nextLine();
+                    }
+                    y = Long.parseLong(tmp);
                     System.out.println("Укажите название местности: ");
                     tmp = scanner.nextLine();
+                    while (tmp.equals("")) {
+
+                        System.out.println("Укажите название местности: ");
+                        tmp = scanner.nextLine();
+                    }
+                    lol.setLocation(new Location(x, y, tmp));
                 }
-                lol.setLocation(new Location(x, y, tmp));
             }
             temp.setKiller(lol);
         }
